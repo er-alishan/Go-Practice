@@ -1,0 +1,8 @@
+Explanation
+
+Account struct → account holder ka naam aur balance store karta hai.
+Display() (Value Receiver) → account details print karta hai, original struct change nahi hota.
+Withdraw() (Pointer Receiver) → balance se amount deduct karta hai, original struct update hota hai.
+main() → ek account banata hai (name=Md Alishan, balance=2000), phir details show karta hai aur withdraw karke balance update karta hai.
+
+Key Point → Value receiver sirf read ke liye, Pointer receiver update ke liye use hota hai.
