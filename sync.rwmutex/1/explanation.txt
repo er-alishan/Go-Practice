@@ -1,0 +1,23 @@
+RWMutex kya hai?
+
+sync.Mutex → ek waqt par sirf ek goroutine access kar sakta hai.
+sync.RWMutex → do mode me kaam karta hai:
+RLock / RUnlock → Multiple readers ek sath read kar sakte hain.
+Lock / Unlock → Ek writer hi likh sakta hai, aur jab writer likh raha ho to koi reader allowed nahi hai.
+
+👉 Matlab: Agar sirf read karna hai to multiple goroutines ek sath kaam kar sakte hain.
+👉 Lekin write karne ke time exclusive lock lagta hai.
+
+
+🔹 Explanation
+Deposit → Lock() use karta hai → ek time par sirf ek hi goroutine balance update karega.
+GetBalance → RLock() use karta hai → multiple readers ek sath balance dekh sakte hain.
+Agar koi writer likh raha hai → readers aur writers dono ko wait karna padega.
+Ye concurrency improve karta hai, kyunki read-only operations lock ko share kar sakte hain.
+
+
+⚡ Interview me pucha jaa sakta hai:
+
+Difference between sync.Mutex and sync.RWMutex?
+Kab RWMutex prefer karna chahiye?
+Agar 90% read aur 10% write hai, to kaunsa better hoga? (Answer: RWMutex)

@@ -1,0 +1,15 @@
+Explanation
+
+BankAccount ke Deposit aur Withdraw methods me mu.Lock() lagaya hai.
+Matlab ek time pe sirf ek goroutine balance ko change kar sakta hai.
+Agar Mutex na lagao to do goroutines ek sath balance update karenge aur balance galat ho jaayega.
+
+Mutex ka Role
+
+Agar mu.Lock() aur mu.Unlock() hata dete:
+Multiple goroutines ek hi samay balance ko read/write karte.
+Example: dono goroutines ek hi samay balance = 100 read karte aur +50 karte → result 150 aata (200 nahi).
+Ye hi race condition hoti.
+
+Mutex ensure karta hai ki:
+👉 "Ek waqt par ek hi banda balance ko change kare."

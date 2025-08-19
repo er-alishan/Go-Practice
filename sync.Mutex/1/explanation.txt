@@ -1,0 +1,40 @@
+🔹 Step by Step Explanation
+
+counter ek shared variable hai jise 5 goroutines ek sath update kar rahe hain.
+Agar lock na lagao to sab goroutines ek sath counter++ karenge aur race condition ho jaayegi (wrong result).
+
+mu.Lock()
+Jab ek goroutine mu.Lock() call karta hai → us goroutine ke liye lock mil jaata hai.
+Baaki goroutines jo mu.Lock() karne ki koshish karenge, wait karenge (block ho jaayenge) jab tak lock release na ho.
+
+Critical Section (counter++)
+Ab jo goroutine lock le chuka hai, wo safely counter ka value update karta hai.
+Is time par koi aur goroutine counter ko touch nahi kar sakta.
+
+mu.Unlock()
+Update hone ke baad lock release kar diya jaata hai.
+Ab agla goroutine jo wait kar raha tha, wo lock le sakta hai aur apna kaam karega.
+
+wg.Wait()
+Program wait karega jab tak saare goroutines khatam nahi ho jaate.
+Fir final counter print hoga.
+
+
+
+Example of Problem Without Mutex
+Agar mutex hata dete:
+
+counter++
+Tab 5 goroutines ek sath counter ko update karenge, aur ho sakta hai final output 5 se kam aaye (race condition).
+
+Example:
+Suppose counter = 0
+2 gorotines ek sath read karte hain → dono ko value 0 dikhti hai
+Dono ne increment kiya aur likha 1
+Expected = 2, but Actual = 1 ❌
+
+Mutex is problem ko solve karta hai.
+
+👉 Simple words me:
+mu.Lock() = "Abhi main use kar raha hoon, tum ruk jao"
+mu.Unlock() = "Mera kaam ho gaya, ab tum use kar lo"
