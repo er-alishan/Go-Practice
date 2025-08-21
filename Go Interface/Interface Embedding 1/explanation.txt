@@ -1,0 +1,8 @@
+Explanation (Short)
+
+We created two separate interfaces: Depositor and Withdrawer.
+Then we created AccountOperations interface which embeds both.
+
+👉 Benefits of Embedding:
+Code Reuse: No need to rewrite Deposit and Withdraw in the combined interface — embedding automatically includes them.
+Scalability: If later we want a new feature like CheckBalance(), we can simply make a new interface BalanceChecker and embed it into AccountOperations without touching existing code.
