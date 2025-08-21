@@ -1,16 +1,30 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-var i interface{} = "Golang"
+// Interface
+type Account interface {
+	GetName() string
+}
+
+// Struct
+type BankAccount struct {
+	holder string
+}
+
+func (b BankAccount) GetName() string {
+	return b.holder
+}
 
 func main() {
-	s, ok := i.(string)
+	acc := Account(BankAccount{"Md Alishan"})
+
+	// ✅ Type assertion: get the concrete type (BankAccount)
+	ba, ok := acc.(BankAccount)
 	if ok {
-		fmt.Println("String Value:", s)
+		fmt.Println("Type assertion successful!")
+		fmt.Println("Account holder:", ba.holder) // Access struct field
 	} else {
-		fmt.Println("Not a string")
+		fmt.Println("Type assertion failed")
 	}
 }
