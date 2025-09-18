@@ -1,18 +1,25 @@
 package main
 
-import (
-	"fmt"
-)
-
-func factorial_recursion(x float64) (y float64) {
-	if x > 0 {
-		y = x * factorial_recursion(x-1)
-	} else {
-		y = 1
-	}
-	return
-}
+import "fmt"
 
 func main() {
-	fmt.Println(factorial_recursion(4))
+	fact := factorial(5)
+	fmt.Println(fact)
 }
+
+func factorial(number int) int {
+	if number == 0 {
+		return 1
+	}
+	return number * factorial(number-1)
+
+	// result := 1
+
+	// for i := 1; i <= number; i++ {
+	// 	result = result * i
+	// }
+
+	// return result
+}
+
+// factorial of 5 => 5 * 4 * 3 * 2 * 1 => 120
